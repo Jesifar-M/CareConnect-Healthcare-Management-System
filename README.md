@@ -1,4 +1,5 @@
-🏥 CareConnect – Healthcare Appointment Management System
+# 🏥 CareConnect – Healthcare Appointment Management System
+
 
 A full-stack healthcare appointment management system designed to simplify doctor discovery, appointment booking, and hospital administration.
 
