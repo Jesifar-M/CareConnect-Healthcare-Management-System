@@ -1,0 +1,367 @@
+/* ================================
+   CARECONNECT - DOCTORS PAGE
+   Professional UI Design
+================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+.doctors-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+/* ---------- HERO ---------- */
+
+.doctors-hero {
+  background: linear-gradient(135deg, #e6f7f8 0%, #f8fbfc 55%, #eaf6f8 100%);
+  padding: 80px 8%;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.doctors-hero-content {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 30px;
+  background: #e0f4f5;
+  color: #168a96;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.doctors-hero h1 {
+  margin: 20px 0 16px;
+  font-size: clamp(34px, 5vw, 54px);
+  line-height: 1.15;
+  color: #172b4d;
+  font-weight: 750;
+}
+
+.doctors-hero h1 span {
+  color: #1596a3;
+}
+
+.doctors-hero p {
+  max-width: 620px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #64748b;
+}
+
+/* ---------- MAIN CONTENT ---------- */
+
+.doctors-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 25px;
+}
+
+.doctors-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.doctors-heading h2 {
+  margin: 12px 0 8px;
+  font-size: 32px;
+  color: #172b4d;
+}
+
+.doctors-heading p {
+  margin: 0;
+  color: #64748b;
+  font-size: 15px;
+}
+
+/* ---------- SEARCH ---------- */
+
+.doctor-search {
+  display: flex;
+  align-items: center;
+  width: 330px;
+  background: #ffffff;
+  border: 1px solid #dbe4ea;
+  border-radius: 12px;
+  padding: 0 14px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
+
+.search-icon {
+  font-size: 16px;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+.doctor-search input {
+  width: 100%;
+  padding: 14px 5px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #334155;
+  font-size: 14px;
+}
+
+/* ---------- DOCTOR GRID ---------- */
+
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ---------- DOCTOR CARD ---------- */
+
+.doctor-card {
+  background: #ffffff;
+  border: 1px solid #e5edf1;
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.10);
+}
+
+.doctor-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.doctor-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1596a3, #35b9c3);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.available-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 20px;
+  background: #ecfdf5;
+  color: #15803d;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #22c55e;
+  border-radius: 50%;
+}
+
+/* ---------- DOCTOR INFORMATION ---------- */
+
+.doctor-info {
+  padding: 22px 0;
+  flex-grow: 1;
+}
+
+.doctor-info h3 {
+  margin: 0 0 7px;
+  color: #172b4d;
+  font-size: 20px;
+}
+
+.specialty {
+  margin: 0 0 18px;
+  color: #1596a3;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.doctor-experience {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.doctor-experience span {
+  color: #1596a3;
+  font-weight: bold;
+}
+
+/* ---------- BOOK BUTTON ---------- */
+
+.book-btn {
+  display: block;
+  width: 100%;
+  padding: 13px 18px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  background: #172b4d;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.book-btn:hover {
+  background: #1596a3;
+  transform: translateY(-1px);
+}
+
+/* ---------- STATES ---------- */
+
+.loading-message,
+.error-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+}
+
+.loading-message {
+  color: #64748b;
+}
+
+.error-message {
+  color: #dc2626;
+}
+
+.no-doctors {
+  grid-column: 1 / -1;
+  text-align: center;
+  background: #ffffff;
+  padding: 50px 20px;
+  border-radius: 16px;
+  border: 1px solid #e5edf1;
+}
+
+.no-doctors h3 {
+  margin: 0 0 8px;
+  color: #172b4d;
+}
+
+.no-doctors p {
+  margin: 0;
+  color: #64748b;
+}
+
+/* ---------- CTA ---------- */
+
+.doctor-cta {
+  max-width: 1150px;
+  margin: 0 auto 80px;
+  padding: 45px 55px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #1596a3, #172b4d);
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.light-tag {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.doctor-cta h2 {
+  margin: 14px 0 10px;
+  font-size: 30px;
+}
+
+.doctor-cta p {
+  margin: 0;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.cta-button {
+  flex-shrink: 0;
+  padding: 14px 24px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #172b4d;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 900px) {
+  .doctors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .doctors-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .doctor-search {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .doctors-hero {
+    padding: 60px 20px;
+  }
+
+  .doctors-content {
+    padding: 50px 18px;
+  }
+
+  .doctors-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-cta {
+    margin: 0 18px 50px;
+    padding: 35px 25px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .doctor-cta h2 {
+    font-size: 25px;
+  }
+
+  .cta-button {
+    width: 100%;
+    text-align: center;
+  }
+}

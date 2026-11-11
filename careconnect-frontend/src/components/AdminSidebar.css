@@ -1,0 +1,342 @@
+/* =========================================
+   CARECONNECT - PROFESSIONAL ADMIN SIDEBAR
+========================================= */
+
+.admin-sidebar {
+  width: 260px;
+  min-width: 260px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: #ffffff;
+  border-right: 1px solid #e8edf2;
+  padding: 24px 16px;
+
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  box-shadow: 8px 0 30px rgba(23, 53, 74, 0.03);
+}
+
+/* =========================================
+   BRAND
+========================================= */
+
+.admin-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 8px 26px;
+}
+
+.admin-sidebar-logo {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #159b91, #42b7ad);
+
+  box-shadow: 0 8px 20px rgba(21, 155, 145, 0.2);
+}
+
+.admin-brand-text {
+  min-width: 0;
+}
+
+.admin-brand-text h2 {
+  margin: 0;
+  color: #19384d;
+  font-size: 18px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.admin-brand-text span {
+  display: block;
+  margin-top: 3px;
+
+  color: #159b91;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+/* =========================================
+   MENU
+========================================= */
+
+.admin-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.admin-sidebar-title {
+  margin: 15px 10px 8px;
+  color: #a1adb7;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.admin-nav-link {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 12px 13px;
+  border-radius: 11px;
+
+  color: #71818d;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.admin-nav-link svg {
+  flex-shrink: 0;
+}
+
+.admin-nav-link span {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.admin-nav-link:hover {
+  color: #159b91;
+  background: #f1faf8;
+}
+
+.admin-nav-link.active {
+  color: #159b91;
+  background: #e8f8f5;
+  font-weight: 750;
+}
+
+.admin-sidebar-divider {
+  height: 1px;
+  margin: 14px 8px 2px;
+  background: #edf1f3;
+}
+
+/* =========================================
+   BOTTOM SECTION
+========================================= */
+
+.admin-sidebar-bottom {
+  flex-shrink: 0;
+  padding-top: 20px;
+  border-top: 1px solid #edf1f3;
+}
+
+.admin-logout-button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 13px;
+  border: none;
+  border-radius: 11px;
+
+  color: #e05a67;
+  background: #fff7f8;
+
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.admin-logout-button:hover {
+  background: #ffeef0;
+}
+
+.sidebar-admin-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 17px;
+  padding: 0 7px;
+}
+
+.sidebar-user-avatar {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #5276d9, #7a96eb);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.sidebar-admin-user strong {
+  display: block;
+  color: #263d4d;
+  font-size: 12px;
+}
+
+.sidebar-admin-user span {
+  display: block;
+  margin-top: 3px;
+  color: #96a2aa;
+  font-size: 10px;
+}
+
+/* Close button - desktop hidden */
+
+.sidebar-close-button {
+  display: none;
+  margin-left: auto;
+  flex-shrink: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+  color: #71818d;
+  cursor: pointer;
+}
+
+/* =========================================
+   LAPTOP / TABLET
+========================================= */
+
+@media (max-width: 900px) and (min-width: 769px) {
+  .admin-sidebar {
+    width: 235px;
+    min-width: 235px;
+    padding: 20px 12px;
+  }
+
+  .admin-sidebar-brand {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE SIDEBAR
+========================================= */
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    /* Proper width for mobile screens */
+    width: min(84vw, 300px);
+    min-width: min(84vw, 300px);
+    height: 100dvh;
+
+    padding: 18px 12px;
+
+    transform: translateX(-105%);
+    transition: transform 0.3s ease;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    box-shadow: 12px 0 40px rgba(20, 40, 55, 0.15);
+  }
+
+  .admin-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  /* Brand */
+  .admin-sidebar-brand {
+    padding: 4px 5px 18px;
+    gap: 9px;
+  }
+
+  .admin-sidebar-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .admin-brand-text h2 {
+    font-size: 16px;
+  }
+
+  .admin-brand-text span {
+    font-size: 8px;
+    letter-spacing: 1.2px;
+  }
+
+  /* Close button */
+  .sidebar-close-button {
+    display: flex;
+    width: 34px;
+    height: 34px;
+  }
+
+  /* Menu */
+  .admin-sidebar-title {
+    margin: 12px 8px 6px;
+  }
+
+  .admin-nav-link {
+    gap: 10px;
+    padding: 11px 10px;
+    font-size: 13px;
+  }
+
+  /* Long names will stay visible */
+  .admin-nav-link span {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.3;
+  }
+
+  /* Bottom section remains accessible */
+  .admin-sidebar-bottom {
+    margin-top: 20px;
+    padding-bottom: 5px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+  .admin-sidebar {
+    width: 88vw;
+    min-width: 88vw;
+  }
+
+  .admin-sidebar-brand {
+    gap: 8px;
+  }
+
+  .admin-nav-link {
+    font-size: 12px;
+  }
+}
