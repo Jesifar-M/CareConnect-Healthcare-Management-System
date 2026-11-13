@@ -59,7 +59,7 @@ function AdminDashboard() {
           patient: appointment.patientName || "Patient",
           type: appointment.reason || "General Consultation",
           doctor: appointment.doctorName || "Doctor",
-          department: "Healthcare",
+          department: appointment.department || "Healthcare",
           time: appointment.appointmentTime || "Not selected",
           status: appointment.status || "BOOKED",
           date: appointment.appointmentDate,
@@ -76,9 +76,10 @@ function AdminDashboard() {
   }, []);
 
   const confirmedCount = appointments.filter(
-    (appointment) =>
-      appointment.status.toUpperCase() === "CONFIRMED" ||
-      appointment.status.toUpperCase() === "BOOKED"
+    (appointment) => {
+      const status = appointment.status.toUpperCase();
+      return status === "CONFIRMED" || status === "BOOKED";
+    }
   ).length;
 
   const pendingCount = appointments.filter(
@@ -103,14 +104,14 @@ Status: ${appointment.status}`
 
   return (
     <div className="admin-dashboard">
-      {/* PAGE HEADER */}
+      {/* HEADER */}
       <div className="dashboard-heading">
         <div>
           <p className="eyebrow">ADMIN OVERVIEW</p>
           <h1>Welcome back, Administrator!</h1>
           <p className="dashboard-subtitle">
-            Here's a complete overview of your hospital and appointment
-            activity.
+            Monitor appointments, patients, doctors and healthcare activity
+            from one central dashboard.
           </p>
         </div>
 
@@ -125,7 +126,9 @@ Status: ${appointment.status}`
       {/* STATISTICS */}
       <div className="stats-grid">
         <div className="stat-card">
-          <div className="stat-icon patients-icon">👥</div>
+          <div className="stat-icon patients-icon">
+            <span>PT</span>
+          </div>
           <div className="stat-content">
             <p>Total Patients</p>
             <h2>{dashboardData.totalPatients}</h2>
@@ -134,135 +137,119 @@ Status: ${appointment.status}`
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon appointments-icon">📅</div>
+          <div className="stat-icon appointments-icon">
+            <span>AP</span>
+          </div>
           <div className="stat-content">
             <p>Total Appointments</p>
             <h2>{dashboardData.totalAppointments}</h2>
-            <span className="positive">
-              Appointments in the system
-            </span>
+            <span className="positive">Appointments in the system</span>
           </div>
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon doctors-icon">🩺</div>
+          <div className="stat-icon doctors-icon">
+            <span>DR</span>
+          </div>
           <div className="stat-content">
             <p>Total Doctors</p>
             <h2>{dashboardData.totalDoctors}</h2>
-            <span className="neutral">
-              Healthcare professionals
-            </span>
+            <span className="neutral">Healthcare professionals</span>
           </div>
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon pending-icon">⏳</div>
+          <div className="stat-icon pending-icon">
+            <span>!</span>
+          </div>
           <div className="stat-content">
             <p>Pending Requests</p>
             <h2>{pendingCount}</h2>
-            <span className="warning-text">
-              Needs your attention
-            </span>
+            <span className="warning-text">Needs your attention</span>
           </div>
         </div>
       </div>
 
-      {/* GRAPH + APPOINTMENT STATUS */}
+      {/* OVERVIEW */}
       <div className="top-dashboard-grid">
         <section className="chart-card">
           <div className="card-header">
             <div>
               <h2>Appointment Overview</h2>
-              <p>Appointment activity and performance</p>
+              <p>Overview of appointment activity</p>
             </div>
 
-            <select className="chart-select">
-              <option>This Week</option>
-              <option>This Month</option>
-            </select>
+            <div className="live-badge">
+              <span></span>
+              Live Data
+            </div>
           </div>
 
           <div className="chart-summary">
-            <div>
+            <div className="chart-total">
               <span>Total Appointments</span>
               <strong>{dashboardData.totalAppointments}</strong>
             </div>
 
-            <div className="chart-growth">
-              <span>Live Data</span>
-              <small>Connected to CareConnect backend</small>
+            <div className="chart-info">
+              <strong>CareConnect</strong>
+              <span>Healthcare activity overview</span>
             </div>
           </div>
 
-          {/* PROFESSIONAL GRAPH */}
-          <div className="line-chart">
-            <div className="chart-y-axis">
-              <span>800</span>
-              <span>600</span>
-              <span>400</span>
-              <span>200</span>
-              <span>0</span>
-            </div>
+          <div className="chart-visual">
+            <div className="chart-grid-lines"></div>
 
-            <div className="graph-area">
-              <div className="graph-grid"></div>
+            <svg
+              className="chart-svg"
+              viewBox="0 0 900 280"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient
+                  id="appointmentFill"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop offset="0%" stopColor="#159b91" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#159b91" stopOpacity="0" />
+                </linearGradient>
+              </defs>
 
-              <svg
-                className="chart-svg"
-                viewBox="0 0 800 260"
-                preserveAspectRatio="none"
-              >
-                <defs>
-                  <linearGradient
-                    id="graphFill"
-                    x1="0"
-                    x2="0"
-                    y1="0"
-                    y2="1"
-                  >
-                    <stop
-                      offset="0%"
-                      stopColor="#159b91"
-                      stopOpacity="0.22"
-                    />
-                    <stop
-                      offset="100%"
-                      stopColor="#159b91"
-                      stopOpacity="0"
-                    />
-                  </linearGradient>
-                </defs>
+              <path
+                d="M0,220 C70,190 90,205 150,170 S230,120 290,150 S370,100 440,120 S520,70 590,95 S660,130 720,65 S820,50 900,25 L900,280 L0,280 Z"
+                fill="url(#appointmentFill)"
+              />
 
-                <path
-                  className="graph-fill"
-                  d="M0,210 C40,190 60,195 95,170 S150,135 190,155 S245,120 285,135 S340,105 385,115 S440,80 485,100 S540,55 580,75 S635,90 680,45 S740,50 800,15 L800,260 L0,260 Z"
-                />
+              <path
+                d="M0,220 C70,190 90,205 150,170 S230,120 290,150 S370,100 440,120 S520,70 590,95 S660,130 720,65 S820,50 900,25"
+                fill="none"
+                stroke="#159b91"
+                strokeWidth="5"
+                strokeLinecap="round"
+              />
+            </svg>
 
-                <path
-                  className="graph-line"
-                  d="M0,210 C40,190 60,195 95,170 S150,135 190,155 S245,120 285,135 S340,105 385,115 S440,80 485,100 S540,55 580,75 S635,90 680,45 S740,50 800,15"
-                />
-              </svg>
-
-              <div className="chart-months">
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-                <span>Sun</span>
-              </div>
+            <div className="chart-labels">
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+              <span>Sun</span>
             </div>
           </div>
         </section>
 
-        {/* APPOINTMENT STATUS */}
+        {/* STATUS */}
         <section className="overview-card">
           <div className="card-header">
             <div>
               <h2>Appointment Status</h2>
-              <p>Current appointment status</p>
+              <p>Current appointment summary</p>
             </div>
           </div>
 
@@ -276,7 +263,7 @@ Status: ${appointment.status}`
           </div>
 
           <div className="status-summary">
-            <div>
+            <div className="status-item">
               <div className="summary-label">
                 <span className="dot confirmed-dot"></span>
                 <span>Confirmed</span>
@@ -284,7 +271,7 @@ Status: ${appointment.status}`
               <strong>{confirmedCount}</strong>
             </div>
 
-            <div>
+            <div className="status-item">
               <div className="summary-label">
                 <span className="dot pending-dot"></span>
                 <span>Pending</span>
@@ -292,7 +279,7 @@ Status: ${appointment.status}`
               <strong>{pendingCount}</strong>
             </div>
 
-            <div>
+            <div className="status-item">
               <div className="summary-label">
                 <span className="dot completed-dot"></span>
                 <span>Completed</span>
@@ -303,7 +290,7 @@ Status: ${appointment.status}`
         </section>
       </div>
 
-      {/* TODAY'S APPOINTMENTS */}
+      {/* APPOINTMENTS */}
       <section className="appointments-card">
         <div className="card-header">
           <div>
@@ -336,9 +323,7 @@ Status: ${appointment.status}`
             appointments.slice(0, 5).map((appointment) => (
               <div className="appointment-row" key={appointment.id}>
                 <div className="patient-info">
-                  <div className="avatar">
-                    {appointment.initials}
-                  </div>
+                  <div className="avatar">{appointment.initials}</div>
 
                   <div className="appointment-details">
                     <h4>{appointment.patient}</h4>
@@ -368,7 +353,7 @@ Status: ${appointment.status}`
                   onClick={() => handleAppointmentDetails(appointment)}
                   aria-label="View appointment details"
                 >
-                  ⋮
+                  •••
                 </button>
               </div>
             ))
@@ -378,7 +363,6 @@ Status: ${appointment.status}`
 
       {/* BOTTOM SECTION */}
       <div className="bottom-grid">
-        {/* RECENT ACTIVITY */}
         <section className="activity-card">
           <div className="card-header">
             <div>
@@ -393,8 +377,8 @@ Status: ${appointment.status}`
               <div className="activity-content">
                 <h4>Appointments updated</h4>
                 <p>
-                  CareConnect appointment data is connected to the
-                  administration dashboard.
+                  Appointment information is connected to the administration
+                  dashboard.
                 </p>
                 <span>Recently updated</span>
               </div>
@@ -405,7 +389,8 @@ Status: ${appointment.status}`
               <div className="activity-content">
                 <h4>Patient management</h4>
                 <p>
-                  Registered patients can be managed from the admin portal.
+                  Registered patients can be viewed and managed from the admin
+                  portal.
                 </p>
                 <span>Admin access</span>
               </div>
@@ -424,7 +409,6 @@ Status: ${appointment.status}`
           </div>
         </section>
 
-        {/* DEPARTMENTS */}
         <section className="departments-card">
           <div className="card-header">
             <div>
@@ -435,10 +419,7 @@ Status: ${appointment.status}`
 
           <div className="department-list">
             {departments.map((department) => (
-              <div
-                className="department-item"
-                key={department.name}
-              >
+              <div className="department-item" key={department.name}>
                 <div className="department-title">
                   <span>{department.name}</span>
                   <strong>{department.doctors} Doctors</strong>
