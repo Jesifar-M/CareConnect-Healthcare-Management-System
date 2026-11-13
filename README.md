@@ -310,16 +310,17 @@ http://localhost:8081
 ## ⭐ Project Highlights
 
 - Clean and professional user interface
-- Responsive application design
+- Responsive design for desktop and mobile devices
 - Separate user and admin portals
 - Full-stack application architecture
 - Secure user authentication
-- Password update functionality
+- Secure password update with current password verification
 - REST API integration
 - MySQL database integration
 - Doctor and patient management
 - Appointment booking and management
-- Admin dashboard
+- Professional admin dashboard
+- Responsive admin dashboard for desktop and mobile views
 - Reports and analytics
 
 ---
