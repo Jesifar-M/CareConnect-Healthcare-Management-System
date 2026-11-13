@@ -1,15 +1,21 @@
 package careconnect_backend.controller;
 
 import careconnect_backend.dto.LoginRequest;
+import careconnect_backend.dto.PasswordUpdateRequest;
 import careconnect_backend.entity.User;
 import careconnect_backend.service.UserService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173"})public class AuthController {
+@CrossOrigin(origins = {
+        "http://localhost:3000",
+        "http://localhost:5173"
+})
+public class AuthController {
 
     private final UserService userService;
 
@@ -22,15 +28,23 @@ import org.springframework.web.bind.annotation.*;
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         try {
             User registeredUser = userService.registerUser(user);
-            return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+            return new ResponseEntity<>(
+                    registeredUser,
+                    HttpStatus.CREATED
+            );
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(
+                    e.getMessage(),
+                    HttpStatus.BAD_REQUEST
+            );
         }
     }
 
     // Login API
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> loginUser(
+            @RequestBody LoginRequest loginRequest) {
+
         try {
             User user = userService.loginUser(
                     loginRequest.getEmail(),
@@ -40,7 +54,34 @@ import org.springframework.web.bind.annotation.*;
             return ResponseEntity.ok(user);
 
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(
+                    e.getMessage(),
+                    HttpStatus.UNAUTHORIZED
+            );
+        }
+    }
+
+    // Update Password API
+    @PutMapping("/update-password")
+    public ResponseEntity<?> updatePassword(
+            @RequestBody PasswordUpdateRequest passwordRequest) {
+
+        try {
+            userService.updatePassword(
+                    passwordRequest.getEmail(),
+                    passwordRequest.getOldPassword(),
+                    passwordRequest.getNewPassword()
+            );
+
+            return ResponseEntity.ok(
+                    "Password updated successfully"
+            );
+
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(
+                    e.getMessage(),
+                    HttpStatus.BAD_REQUEST
+            );
         }
     }
 }

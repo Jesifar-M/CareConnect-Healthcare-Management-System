@@ -22,7 +22,7 @@ function Profile() {
       : "A";
   };
 
-  const handlePasswordUpdate = (e) => {
+  const handlePasswordUpdate = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -34,11 +34,38 @@ function Profile() {
       return;
     }
 
-    // Password update successful
-    e.target.reset();
-    setMessage("Password updated successfully!");
+    try {
+      const response = await fetch(
+        "http://localhost:8081/api/auth/update-password",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: currentUser.email,
+            oldPassword: formData.get("oldPassword"),
+            newPassword: newPassword,
+          }),
+        }
+      );
 
-    // Keep the form open so the user can see the success message
+      const result = await response.text();
+
+      if (!response.ok) {
+        setMessage(result || "Failed to update password.");
+        return;
+      }
+
+      e.target.reset();
+      setMessage("Password updated successfully!");
+
+    } catch (error) {
+      console.error("Password update error:", error);
+      setMessage(
+        "Unable to connect to the server. Please try again."
+      );
+    }
   };
 
   return (
@@ -53,7 +80,6 @@ function Profile() {
 
         <div className="profile-grid">
 
-          {/* PROFILE SUMMARY */}
           <section className="profile-summary-card">
             <div className="profile-big-avatar">
               {getInitial()}
@@ -68,7 +94,6 @@ function Profile() {
             </div>
           </section>
 
-          {/* PERSONAL DETAILS */}
           <section className="profile-details-card">
             <div className="profile-card-header">
               <div>
@@ -143,7 +168,6 @@ function Profile() {
           </section>
         </div>
 
-        {/* SECURITY SECTION */}
         <section className="profile-security-card">
           <div className="security-info">
             <div className="security-icon">
@@ -169,7 +193,6 @@ function Profile() {
           </button>
         </section>
 
-        {/* UPDATE PASSWORD FORM */}
         {showPasswordForm && (
           <section className="password-form-card">
             <h2>Update Password</h2>
@@ -177,6 +200,18 @@ function Profile() {
 
             <form onSubmit={handlePasswordUpdate}>
               <div className="password-input-grid">
+
+                {/* CURRENT PASSWORD */}
+                <div>
+                  <label>Current Password</label>
+                  <input
+                    type="password"
+                    name="oldPassword"
+                    placeholder="Enter current password"
+                    required
+                  />
+                </div>
+
                 <div>
                   <label>New Password</label>
                   <input
@@ -196,13 +231,11 @@ function Profile() {
                     required
                   />
                 </div>
+
               </div>
 
               {message && (
-                <p
-                  className="password-message"
-                  role="alert"
-                >
+                <p className="password-message" role="alert">
                   {message}
                 </p>
               )}

@@ -62,4 +62,32 @@ public class UserService {
 
         return user;
     }
+
+    // Update user password
+    public void updatePassword(
+            String email,
+            String oldPassword,
+            String newPassword) {
+
+        // Find user using email
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        // Verify current password
+        if (!passwordEncoder.matches(
+                oldPassword,
+                user.getPassword())) {
+
+            throw new RuntimeException("Current password is incorrect");
+        }
+
+        // Encrypt the new password before saving
+        user.setPassword(
+                passwordEncoder.encode(newPassword)
+        );
+
+        // Save the updated password
+        userRepository.save(user);
+    }
 }
