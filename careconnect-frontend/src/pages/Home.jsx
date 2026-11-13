@@ -43,9 +43,8 @@ function Home() {
               Find a Doctor <ArrowRight size={18} />
             </Link>
 
-            {/* TOP GET STARTED - CLICKABLE */}
             <Link to="/register" className="home-secondary-btn">
-              Get Started
+              Create Your Account
             </Link>
           </div>
 
@@ -218,7 +217,7 @@ function Home() {
             </p>
 
             <Link to="/login">
-              Get Started <ArrowRight size={16} />
+              Manage Appointments <ArrowRight size={16} />
             </Link>
           </div>
         </div>
@@ -314,8 +313,8 @@ function Home() {
           <p>Find a doctor and schedule your appointment today.</p>
         </div>
 
-        <Link to="/register" className="cta-button">
-          Get Started <ArrowRight size={18} />
+        <Link to="/doctors" className="cta-button">
+          Find Your Doctor <ArrowRight size={18} />
         </Link>
       </section>
 
